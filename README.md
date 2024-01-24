@@ -1,3 +1,5 @@
+EJERCICIO 1
+
 Crea un nuevo PROYECTO y crea el contador que creamos en android(sin funcionalidad por ahora).
 
 
@@ -25,3 +27,43 @@ Dentro del extended tambien he añadido los tres botones utilizando el widget _b
 
 
 Finalmente he añadido el texto de bienvenida del pie de pagina fuera del Expanded y utilizando padding: EdgeInsets.only y TextStyle para lograr la posicion y propiedades de la letra para acabar con el resultado que se ve por pantalla.
+
+
+
+
+ EJERCICIO 2
+- Deberás de crear una clase en flutter que sea una plantilla de los botones, en la que le pases el argumento de texto y  sustituirlo  por los 3 botones que tenemos → 2 puntos
+- Darle funcionalidad a los botones, cambios solo por consola → 2 puntos
+- Cambios por pantalla → 4 puntos.
+- README → 2 puntos.
+
+En este ejercicio he implementado la funcionalidad del contador haciendo que se actualize el texto del centro dependiendo de cual de los 3 botones se pulse. Proporciono capturas del resultado y explico:
+
+[![ejercicio2flutter.png](https://i.postimg.cc/zvVkJTHp/ejercicio2flutter.png)](https://postimg.cc/D43G6Jgb)
+
+
+
+
+
+
+
+[![ej2flutter.png](https://i.postimg.cc/fyGYDpNT/ej2flutter.png)](https://postimg.cc/7JN5NBhp)
+
+
+
+
+
+Como podemos ver, dependiendo de el boton que se pulse se mostrará la suma, resta o reseteo del contador por pantalla además de verse también por consola.
+Para realizar este ejercicio he creado otra clase stateless widget que será la plantilla de los botones. Para ello he programado la plantilla de forma que requiera texto y la función onTap de la que hablaré mas adelante. 
+
+En la clase principal he sustituido donde tenia los botones por el nuevo metodo creado. También he eliminado el widget buildButton ya que para hacer la plantilla me iba a ser mas complicado y he puesto las propiedades del boton dentro del build.
+
+Para la funcionalidad de los botones he creado una variable String text y otra variable del tipo VoidCallback llamada onTap. VoidCallback es un tipo de función de retorno de llamada (callback) que no recibe ningún argumento y no devuelve ningún valor, se suele usar para botones para que reciba el onTap, como es el caso. haciendo esto conseguimos que onTap se comporte como una variable callback que permite que el widget sepa qué acción ejecutar cuando se produce un evento de toque.ç
+
+En la clase principal he creado 2 variables: Una de tipo int contador = 0 y otra de tipo TextEditingController contadorController = TextEditingController().  TextEditingController es una clase en Flutter que se utiliza para controlar y manipular el contenido de un widget de entrada de texto como es este caso actualizar el numero por pantalla. Despues he igualado la variable contadorController al contador haciendo un toString en el build.
+  
+
+Sabiendo esto ya solo queda añadir el texto que habra en cada boton y añadirle el onTap para que cuando se pulse el boton del texto '+', '-' o 'RESET',se haga un contador++, contador-- y contador==0 respectivamente además de un print(contador) para que se vea por consola tambien.
+
+
+Como extra para añadir he tenido que cambiar la clase principal de stateless a statefull para que el numero se actualide al momento de pulsar el boton. Y tambien que he utilizado setState() dentro del onTap ya que es un metodo que notifica al widget de que tiene que actualizar el build ya que va a haber un cambio.

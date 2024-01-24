@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-
+import 'package:leonmunoza02/widgets/Boton.dart';
+import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
   final Color customGreyColor = Color.fromRGBO(43, 43, 44, 1);
+  int contador = 0;
+  TextEditingController _contadorController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    _contadorController.text = contador.toString();
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -63,9 +71,9 @@ class MyApp extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 20.0),
                     child: Center(
                       child: Text(
-                        '0',
+                        _contadorController.text,
                         style: TextStyle(
-                          fontWeight: FontWeight.w100, 
+                          fontWeight: FontWeight.w100,
                           fontFamily: 'Poppins_ExtraLight',
                           color: Colors.white,
                           fontSize: 200,
@@ -78,11 +86,33 @@ class MyApp extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _buildButton('+'),
-                        SizedBox(width: 16.0),
-                        _buildButton('RESET'),
-                        SizedBox(width: 16.0),
-                        _buildButton('-'),
+                        Boton(
+                          text: '-',
+                          onTap: () {
+                            setState(() {
+                              contador--;
+                               print(contador);
+                            });
+                          },
+                        ),
+                          Boton(
+                          text: 'RESET',
+                          onTap: () {
+                            setState(() {
+                              contador = 0;
+                               print(contador);
+                            });
+                          },
+                        ),
+                        Boton(
+                          text: '+',
+                          onTap: () {
+                            setState(() {
+                              contador++;
+                              print(contador);
+                            });
+                          },
+                        ),                                            
                       ],
                     ),
                   ),
@@ -106,31 +136,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-
-Widget _buildButton(String text) {
-  return Container(
-    width: 120.0, 
-    height: 50.0,
-    decoration: BoxDecoration(
-      color: Color(0xFF1B1B1B),
-      borderRadius: BorderRadius.circular(9.0),
-    ),
-    child: TextButton(
-      onPressed: () {
-       
-      },
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Poppins',
-          color: Colors.white,
-          fontSize: 20,
-        ),
-      ),
-    ),
-  );
-}
-
-
 }
